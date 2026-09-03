@@ -49,6 +49,7 @@ builder.Services.AddAuthentication(options =>
 })
 .AddJwtBearer(options =>//Configures the JWT middleware with token validation parameters.
 {
+    //Uses the same secret key to validate the token's signature.
     options.TokenValidationParameters = new TokenValidationParameters
     {
         ValidateIssuer = true,
@@ -81,7 +82,9 @@ app.UseHttpsRedirection();
 
 // IMPORTANT: Authentication & Authorization middleware will be added in Ticket 3.
 // For now, we only have the services registered.
-app.UseAuthentication(); 
+//Adds the middleware that reads the token from the Authorization header, validates it, and builds the User principal.
+app.UseAuthentication();
+//Enables role/policy-based authorization checks (used later for [Authorize(Roles = "Admin")]).
 app.UseAuthorization();  
 
 app.MapControllers();
