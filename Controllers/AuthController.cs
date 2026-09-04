@@ -55,7 +55,7 @@ public class AuthController : ControllerBase
             return BadRequest(new { Errors = result.Errors.Select(e => e.Description) });
         }
 
-        // (Optional) Assign a default role like "User" – we'll skip for now (Ticket 8 handles roles)
+        // Assign a default role like "User" – we'll skip for now (Ticket 8 handles roles)
 
         // Generate a JWT token for the newly registered user (so they can immediately use the API)
         var token = await GenerateJwtToken(user);
